@@ -48,22 +48,6 @@ func Start(repoFlagName string, tp node.Type) *cobra.Command {
 
 			var opts []node.Option
 
-			trustedHash := cmd.Flag(trustedHashFlag.Name).Value.String()
-			if trustedHash != "" {
-				opts = append(opts, node.WithTrustedHash(trustedHash))
-			}
-			trustedPeer := cmd.Flag(trustedPeerFlag.Name).Value.String()
-			if trustedPeer != "" {
-				opts = append(opts, node.WithTrustedPeer(trustedPeer))
-			}
-			coreRemote := cmd.Flag(coreRemoteFlag.Name).Value.String()
-			if coreRemote != "" {
-				protocol, ip, err := parseAddress(coreRemote)
-				if err != nil {
-					return err
-				}
-				opts = append(opts, node.WithRemoteCore(protocol, ip))
-			}
 			nodeConfig := cmd.Flag(nodeConfigFlag.Name).Value.String()
 			if nodeConfig != "" {
 				cfg, err := node.LoadConfig(nodeConfig)
@@ -71,6 +55,25 @@ func Start(repoFlagName string, tp node.Type) *cobra.Command {
 					return err
 				}
 				opts = append(opts, node.WithConfig(cfg))
+			}
+
+			trustedHash := cmd.Flag(trustedHashFlag.Name).Value.String()
+			if trustedHash != "" {
+				opts = append(opts, node.WithTrustedHash(trustedHash))
+			}
+
+			trustedPeer := cmd.Flag(trustedPeerFlag.Name).Value.String()
+			if trustedPeer != "" {
+				opts = append(opts, node.WithTrustedPeer(trustedPeer))
+			}
+
+			coreRemote := cmd.Flag(coreRemoteFlag.Name).Value.String()
+			if coreRemote != "" {
+				protocol, ip, err := parseAddress(coreRemote)
+				if err != nil {
+					return err
+				}
+				opts = append(opts, node.WithRemoteCore(protocol, ip))
 			}
 
 			repo, err := node.Open(repoPath, tp)
