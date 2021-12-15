@@ -74,9 +74,10 @@ func New(tp Type, repo Repository, options ...Option) (*Node, error) {
 		return nil, err
 	}
 
+	sets := new(settings)
 	for _, option := range options {
 		if option != nil {
-			err := option(cfg)
+			err := option(cfg, sets)
 			if err != nil {
 				return nil, err
 			}
@@ -85,9 +86,9 @@ func New(tp Type, repo Repository, options ...Option) (*Node, error) {
 
 	switch tp {
 	case Full:
-		return newNode(fullComponents(cfg, repo), fxutil.Options(cfg.overrides...))
+		return newNode(fullComponents(cfg, repo), fxutil.Options(sets.overrides()...))
 	case Light:
-		return newNode(lightComponents(cfg, repo), fxutil.Options(cfg.overrides...))
+		return newNode(lightComponents(cfg, repo), fxutil.Options(sets.overrides()...))
 	default:
 		panic("node: unknown Node Type")
 	}
