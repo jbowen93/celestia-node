@@ -23,12 +23,6 @@ func Init(path string, tp Type, options ...Option) error {
 		}
 	}
 
-	return InitWith(path, tp, cfg)
-}
-
-// InitWith initializes the Node FileSystem Repository for the given Node Type 'tp' in the directory under 'path'
-// with the given Config 'cfg'.
-func InitWith(path string, tp Type, cfg *Config) error {
 	path, err := repoPath(path)
 	if err != nil {
 		return err
