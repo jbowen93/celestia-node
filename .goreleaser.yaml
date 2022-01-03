@@ -23,6 +23,10 @@ builds:
     - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
       -X main.builtBy=goreleaser
     binary: celestia-node
+release:
+  draft: false
+  prerelease: auto
+  mode: append
 archives:
   - replacements:
       darwin: Darwin
