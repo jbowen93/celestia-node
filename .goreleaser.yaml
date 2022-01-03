@@ -9,7 +9,7 @@ before:
 builds:
   - env:
       - CGO_ENABLED=0
-      - GORELEASER_CURRENT_TAG=latest
+      - GORELEASER_CURRENT_TAG=v0.0.0
     goos:
       - linux
       - windows
