@@ -44,3 +44,5 @@ test/logs
 test/maverick/maverick
 test/p2p/data/
 vendor
+
+dist/
