@@ -40,7 +40,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value={{github.event.pull_request.head.sha}}
+            type=raw,value=${{ github.event.pull_request.head.sha }}
       - name: Docker meta (Main)
         if: ${{ github.event_name != 'pull_request' }}
         id: meta-main
