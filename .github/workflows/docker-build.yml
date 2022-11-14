@@ -1,6 +1,5 @@
 name: "docker-build"
 
-# Diff to allow git push
 on:
   push:
   workflow_dispatch:
